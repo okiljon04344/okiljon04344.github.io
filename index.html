@@ -9,357 +9,234 @@
 <meta property="og:description" content="Flutter・Firebase・生成AIでアプリを作る、IT専門学校生のポートフォリオ。">
 <meta property="og:type" content="website">
 <meta property="og:image" content="photo1.jpg">
-<meta name="theme-color" content="#0b1424">
+<meta name="theme-color" content="#ffffff">
+<script>document.documentElement.className='js'</script>
 <style>
   :root{
-    --ink:#0b1424;
-    --ink-2:#14213a;
-    --text:#16202f;
-    --muted:#5d6a7e;
-    --bg:#f5f7fa;
-    --card:#ffffff;
-    --line:#e3e8ef;
-    --accent:#10a37f;
-    --accent-2:#0c8466;
-    --accent-soft:#e3f6ef;
-    --gold:#f2b544;
-    --radius:20px;
-    --shadow:0 1px 2px rgba(11,20,36,.04),0 12px 32px -12px rgba(11,20,36,.18);
+    --bg:#f7f7f5;
+    --surface:#ffffff;
+    --ink:#1c2024;
+    --muted:#5a636b;
+    --line:#dfe2de;
+    --accent:#0b7a62;
+    --accent-dark:#085f4d;
+    --dark:#1c2024;
+
+    --fs-small:.875rem;
+    --fs-body:1rem;
+    --fs-h3:1.125rem;
+    --fs-h2:clamp(1.5rem,3.2vw,1.875rem);
+    --fs-h1:clamp(2.25rem,6vw,3.5rem);
+
+    --r:12px;
+    --r-sm:8px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
-    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic","Meiryo","Noto Sans JP",system-ui,-apple-system,sans-serif;
-    background:var(--bg);color:var(--text);line-height:1.85;
+    font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic","Meiryo",system-ui,-apple-system,sans-serif;
+    background:var(--bg);color:var(--ink);font-size:var(--fs-body);line-height:1.8;
     -webkit-font-smoothing:antialiased;
   }
   img{max-width:100%;display:block}
   a{color:inherit}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-  .en{font-family:"Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif;letter-spacing:.02em}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .en{font-family:"Helvetica Neue",Arial,"Noto Sans JP",sans-serif}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
-  /* ===== ナビ ===== */
-  .nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s,box-shadow .3s}
-  .nav.scrolled{background:rgba(11,20,36,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(255,255,255,.06)}
-  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{color:#fff;font-weight:800;text-decoration:none;display:flex;align-items:center;gap:10px}
-  .brand-mark{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#3fd1a8);display:grid;place-items:center;font-size:.9rem;color:var(--ink)}
-  .nav ul{display:flex;gap:24px;list-style:none}
-  .nav ul a{color:rgba(255,255,255,.72);text-decoration:none;font-size:.88rem;font-weight:600;transition:color .2s}
-  .nav ul a:hover,.nav ul a:focus-visible{color:#fff}
-  @media (max-width:640px){.nav ul{display:none}}
+  /* Navigation */
+  .nav{background:var(--surface);border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 24px;padding-top:16px;padding-bottom:16px}
+  .brand{font-weight:700;text-decoration:none;font-size:1.0625rem}
+  .nav ul{display:flex;flex-wrap:wrap;gap:8px 24px;list-style:none}
+  .nav ul a{color:var(--muted);text-decoration:none;font-size:var(--fs-small);font-weight:500}
+  .nav ul a:hover{color:var(--ink)}
+  .nav ul a.strong{color:var(--accent);font-weight:700}
+  @media (min-width:720px){
+    .nav{position:sticky;top:0;z-index:50}
+    .nav .wrap{flex-wrap:nowrap;padding-top:0;padding-bottom:0;height:64px}
+  }
 
-  /* ===== ヒーロー ===== */
-  .hero{
-    position:relative;overflow:hidden;color:#fff;
-    background:
-      radial-gradient(900px 500px at 85% -10%,rgba(16,163,127,.35),transparent 60%),
-      radial-gradient(700px 500px at -10% 110%,rgba(63,120,255,.22),transparent 60%),
-      var(--ink);
-    padding:104px 0 88px;
-  }
-  .hero::after{
-    content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;
-    background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
-    background-size:44px 44px;
-    -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);
-            mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);
-  }
-  .hero-grid{position:relative;z-index:2;display:grid;gap:40px;align-items:center}
-  @media (min-width:700px){.hero-grid{grid-template-columns:1.2fr .8fr;gap:48px}}
-  @media (max-width:699px){
-    .hero{padding-top:88px}
-    .hero-grid{gap:28px}
-    .hero-grid .portrait{order:-1}
-    .badge{font-size:.7rem;padding:8px 10px}
-    .badge span{font-size:1.05rem}
-    .hero-grid .portrait{max-width:none;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
-    .hero-grid .portrait::before{display:none}
-    .portrait .portrait-frame{flex:0 0 200px;aspect-ratio:1/1;border-radius:50%;border:3px solid rgba(63,224,176,.55);box-shadow:0 0 0 8px rgba(63,224,176,.08),0 24px 48px -18px rgba(0,0,0,.7);margin:0 calc((100% - 200px) / 2) 6px}
-    .portrait .badge{position:static;box-shadow:none;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.14)}
-    .portrait .badge small{display:none}
-    .portrait .badge{padding:7px 14px;border-radius:999px;gap:6px;align-self:flex-start}
-  }
-  .status{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:rgba(16,163,127,.14);border:1px solid rgba(16,163,127,.4);color:#7ee5c7;font-size:.8rem;font-weight:700;margin-bottom:22px}
-  .status i{width:8px;height:8px;border-radius:50%;background:#3fe0b0;box-shadow:0 0 0 0 rgba(63,224,176,.6);animation:pulse 2s infinite}
-  @keyframes pulse{70%{box-shadow:0 0 0 10px rgba(63,224,176,0)}100%{box-shadow:0 0 0 0 rgba(63,224,176,0)}}
-  .hero h1{font-size:clamp(2.4rem,6.4vw,4.2rem);line-height:1.08;font-weight:800;letter-spacing:-.01em;margin-bottom:10px}
-  .hero .role{font-size:clamp(1rem,2.4vw,1.2rem);color:#9fb0c8;font-weight:600;margin-bottom:26px}
-  .hero .role b{color:#fff}
-  .catch{font-size:clamp(1.25rem,3.2vw,1.75rem);font-weight:800;line-height:1.5;margin-bottom:18px}
-  .catch em{font-style:normal;background:linear-gradient(90deg,#3fe0b0,#7fb6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p.lead{color:#b9c6d8;max-width:560px}
+  /* Hero */
+  .hero{background:var(--surface);border-bottom:1px solid var(--line);padding:56px 0 64px}
+  .hero-grid{display:grid;gap:40px;align-items:center}
+  @media (min-width:800px){.hero-grid{grid-template-columns:1.25fr .75fr;gap:64px}.hero{padding:88px 0 96px}}
+  .status{display:inline-flex;align-items:center;gap:8px;font-size:var(--fs-small);font-weight:700;color:var(--accent);margin-bottom:24px}
+  .status i{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .hero h1{font-size:var(--fs-h1);line-height:1.15;font-weight:700;margin-bottom:16px}
+  .hero .role{font-size:var(--fs-h3);color:var(--muted);font-weight:500;margin-bottom:32px}
+  .hero .role b{color:var(--ink);font-weight:700}
+  .catch{font-size:clamp(1.25rem,3vw,1.5rem);font-weight:700;line-height:1.5;margin-bottom:16px}
+  .catch em{font-style:normal;color:var(--accent)}
+  .hero p.lead{color:var(--muted);max-width:560px}
   .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:999px;font-weight:700;text-decoration:none;font-size:.95rem;transition:transform .2s,box-shadow .2s,background .2s}
-  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 10px 24px -8px rgba(16,163,127,.7)}
-  .btn-primary:hover{transform:translateY(-2px);background:var(--accent-2)}
-  .btn-ghost{border:1px solid rgba(255,255,255,.25);color:#fff}
-  .btn-ghost:hover{background:rgba(255,255,255,.08)}
+  .btn{display:inline-flex;align-items:center;padding:12px 24px;border-radius:var(--r-sm);font-weight:700;text-decoration:none;font-size:var(--fs-small);border:1px solid var(--line);background:var(--surface);color:var(--ink);transition:background .2s,border-color .2s}
+  .btn:hover{border-color:var(--ink)}
+  .btn-primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-dark);border-color:var(--accent-dark)}
+  .btn-sm{padding:8px 16px}
 
-  .portrait{position:relative;max-width:340px;margin:0 auto;width:100%}
-  .portrait-frame{
-    position:relative;aspect-ratio:4/5;border-radius:28px;overflow:hidden;
-    background:linear-gradient(160deg,#1b2b47,#0f1a2e);
-    box-shadow:0 30px 60px -20px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.1);
-  }
+  .portrait{max-width:320px;width:100%;margin:0 auto}
+  .portrait-frame{aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;background:var(--bg);border:1px solid var(--line)}
   .portrait-frame img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
-  .portrait::before{content:"";position:absolute;inset:-14px -14px 14px 14px;border-radius:32px;border:1px solid rgba(63,224,176,.35);z-index:-1}
-  .badge{position:absolute;background:#fff;color:var(--ink);border-radius:16px;padding:10px 14px;box-shadow:var(--shadow);font-size:.78rem;font-weight:700;line-height:1.35;display:flex;align-items:center;gap:10px}
-  .badge span{font-size:1.3rem}
-  .badge small{display:block;color:var(--muted);font-weight:600;font-size:.7rem}
-  .badge.b1{left:-18px;bottom:40px}
-  .badge.b2{right:-14px;top:28px}
+  .portrait-facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}
+  .pf{border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 16px;font-size:var(--fs-small);font-weight:700;line-height:1.5}
+  .pf small{display:block;color:var(--muted);font-weight:400;font-size:.75rem}
+  @media (max-width:799px){
+    .hero-grid .portrait{order:-1;max-width:224px}
+  }
 
-  /* ===== 数字 ===== */
-  .stats{position:relative;z-index:2;margin-top:-44px}
-  .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+  /* Stats */
+  .stats{padding:48px 0 0}
+  .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
   @media (min-width:760px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
-  .stat{background:#fff;padding:24px 20px;text-align:center}
-  .stat b{display:block;font-size:clamp(1.6rem,4vw,2.1rem);color:var(--ink);line-height:1.2;font-weight:800}
-  .stat b small{font-size:.55em;margin-left:2px;color:var(--accent)}
-  .stat span{font-size:.82rem;color:var(--muted);font-weight:600}
-  .stat b .count{font-size:inherit;color:inherit;font-weight:inherit}
+  .stat{background:var(--surface);padding:24px 16px;text-align:center}
+  .stat b{display:block;font-size:clamp(1.5rem,4vw,2rem);line-height:1.3;font-weight:700}
+  .stat b small{font-size:.5em;margin-left:2px;color:var(--accent)}
+  .stat span{font-size:.8125rem;color:var(--muted);line-height:1.5;display:block;margin-top:4px}
 
-  /* ===== セクション ===== */
-  section{padding:96px 0}
-  .eyebrow{display:inline-block;font-size:.78rem;font-weight:800;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}
-  .sec-head{margin-bottom:44px;max-width:640px}
-  .sec-head h2{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.35;color:var(--ink);font-weight:800}
-  .sec-head p{color:var(--muted);margin-top:12px}
+  .tech{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;list-style:none}
+  .tech li{font-size:var(--fs-small);font-weight:500;color:var(--muted);border:1px solid var(--line);background:var(--surface);padding:4px 16px;border-radius:var(--r-sm)}
 
-  /* 強み */
-  .strengths{display:grid;gap:18px}
+  /* Sections */
+  section{padding:80px 0}
+  @media (max-width:640px){section{padding:56px 0}}
+  section[id],header[id]{scroll-margin-top:72px}
+  .eyebrow{display:block;font-size:.8125rem;font-weight:700;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+  .sec-head{margin-bottom:40px;max-width:640px}
+  .sec-head h2{font-size:var(--fs-h2);line-height:1.4;font-weight:700}
+  .sec-head p{color:var(--muted);margin-top:8px}
+
+  /* Strengths */
+  .strengths{display:grid;gap:24px}
   @media (min-width:860px){.strengths{grid-template-columns:repeat(3,1fr)}}
-  .s-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;transition:transform .25s,box-shadow .25s}
-  .s-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-  .s-icon{width:52px;height:52px;border-radius:16px;background:var(--accent-soft);display:grid;place-items:center;font-size:1.5rem;margin-bottom:18px}
-  .s-card h3{font-size:1.12rem;color:var(--ink);margin-bottom:8px;line-height:1.5}
-  .s-card p{color:var(--muted);font-size:.94rem}
+  .s-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:32px 24px}
+  .s-num{display:block;font-size:var(--fs-small);font-weight:700;color:var(--accent);margin-bottom:16px;letter-spacing:.08em}
+  .s-card h3{font-size:var(--fs-h3);margin-bottom:8px;line-height:1.5}
+  .s-card p{color:var(--muted);font-size:.9375rem}
 
-  /* 制作物 */
-  #works{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .project{display:grid;gap:36px;align-items:center;padding:40px 0}
-  .project + .project{border-top:1px dashed var(--line)}
+  /* Works */
+  #works{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .project{display:grid;gap:32px;align-items:center;padding:40px 0}
+  .project + .project{border-top:1px solid var(--line)}
   @media (min-width:900px){
-    .project{grid-template-columns:1fr 1fr;gap:56px}
+    .project{grid-template-columns:1fr 1fr;gap:64px}
     .project.flip .p-visual{order:2}
   }
-  .p-label{display:inline-flex;gap:8px;align-items:center;font-size:.78rem;font-weight:800;color:var(--accent-2);background:var(--accent-soft);padding:5px 12px;border-radius:999px;margin-bottom:14px}
-  .project h3{font-size:clamp(1.4rem,3.4vw,1.9rem);color:var(--ink);line-height:1.35;margin-bottom:6px}
-  .p-sub{color:var(--muted);font-weight:600;font-size:.92rem;margin-bottom:16px}
+  .p-label{display:inline-block;font-size:.8125rem;font-weight:700;color:var(--accent);margin-bottom:8px}
+  .project h3{font-size:clamp(1.375rem,3vw,1.625rem);line-height:1.4;margin-bottom:4px}
+  .p-sub{color:var(--muted);font-weight:500;font-size:.9375rem;margin-bottom:16px}
   .project p.desc{margin-bottom:16px}
-  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
-  .fact{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
-  .fact b{display:block;color:var(--ink);font-size:1.05rem}
-  .fact span{font-size:.72rem;color:var(--muted);font-weight:600}
-  .points{list-style:none;display:grid;gap:8px;margin:14px 0 18px}
-  .points li{position:relative;padding-left:26px;font-size:.95rem}
-  .points li::before{content:"";position:absolute;left:0;top:.55em;width:14px;height:14px;border-radius:50%;background:var(--accent-soft);box-shadow:inset 0 0 0 4px var(--accent)}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:24px 0}
+  .fact{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px;text-align:center}
+  .fact b{display:block;font-size:var(--fs-body)}
+  .fact span{font-size:.75rem;color:var(--muted)}
+  .points{list-style:none;display:grid;gap:8px;margin:16px 0 24px}
+  .points li{position:relative;padding-left:20px;font-size:.9375rem}
+  .points li::before{content:"";position:absolute;left:4px;top:.75em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
   .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{font-size:.76rem;font-weight:700;color:var(--ink-2);background:#eef2f7;border:1px solid var(--line);padding:4px 11px;border-radius:999px}
+  .chip{font-size:.8125rem;font-weight:500;color:var(--muted);background:var(--bg);border:1px solid var(--line);padding:2px 12px;border-radius:var(--r-sm)}
 
-  .p-visual{position:relative;border-radius:28px;min-height:340px;display:flex;align-items:center;justify-content:center;gap:18px;padding:36px 20px;overflow:hidden}
-  .v-halal{background:radial-gradient(circle at 25% 15%,#2c4a6b,#121c2b 70%)}
-  .v-halal .logo{position:absolute;left:18px;top:18px;width:64px;height:64px;border-radius:18px;background:#fff;box-shadow:var(--shadow);display:grid;place-items:center;padding:10px;z-index:2}
-  .v-halal .logo img{width:100%;height:100%;object-fit:contain}
-  .v-halal .tag-float{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);background:#fff;border-radius:999px;padding:8px 16px;font-size:.8rem;font-weight:800;color:#0d6b3e;box-shadow:var(--shadow);white-space:nowrap;z-index:2}
-  .v-edu{background:radial-gradient(circle at 70% 10%,#1f3b33,#0e1a17 70%)}
-  .phone{width:44%;max-width:210px;border-radius:30px;padding:7px;background:#05080a;box-shadow:0 30px 50px -20px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.08)}
-  .phone img{border-radius:24px;width:100%;aspect-ratio:9/20;object-fit:cover;object-position:top;background:#111}
-  .phone.back{transform:translateY(28px) rotate(4deg)}
-  .phone.front{transform:translateY(-10px) rotate(-3deg)}
+  .p-visual{position:relative;border-radius:var(--r);background:var(--bg);border:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:center;gap:16px;padding:32px 16px 24px;overflow:hidden}
+  .p-visual .logo{position:absolute;left:16px;top:16px;width:48px;height:48px;border-radius:var(--r-sm);background:#fff;border:1px solid var(--line);padding:8px}
+  .p-visual .logo img{width:100%;height:100%;object-fit:contain}
+  .p-visual.has-logo{padding-top:72px}
+  .p-visual .caption{flex-basis:100%;text-align:center;font-size:.8125rem;font-weight:700;color:var(--muted)}
+  .phone{width:calc(50% - 8px);max-width:200px;border-radius:24px;padding:6px;background:#1c2024}
+  .phone img{border-radius:18px;width:100%;aspect-ratio:9/20;object-fit:cover;object-position:top;background:#2a2f35}
 
-  .mini-grid{display:grid;gap:18px;margin-top:40px}
+  .mini-grid{display:grid;gap:24px;margin-top:40px}
   @media (min-width:760px){.mini-grid{grid-template-columns:repeat(3,1fr)}}
-  .mini{border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:var(--bg)}
-  .mini .m-ico{font-size:1.5rem;margin-bottom:10px}
-  .mini h4{color:var(--ink);font-size:1.05rem;margin-bottom:4px}
-  .mini .m-sub{font-size:.8rem;color:var(--muted);font-weight:700;margin-bottom:8px}
-  .mini p{font-size:.92rem;color:var(--muted);margin-bottom:12px}
+  .mini{border:1px solid var(--line);border-radius:var(--r);padding:24px;background:var(--bg)}
+  .mini h4{font-size:var(--fs-h3);margin-bottom:4px}
+  .mini .m-sub{font-size:.8125rem;color:var(--accent);font-weight:700;margin-bottom:8px}
+  .mini p{font-size:.9375rem;color:var(--muted);margin-bottom:16px}
 
-  /* スキル */
-  .skill-grid{display:grid;gap:18px}
+  /* Skills */
+  .skill-grid{display:grid;gap:24px}
   @media (min-width:760px){.skill-grid{grid-template-columns:repeat(2,1fr)}}
   @media (min-width:1000px){.skill-grid{grid-template-columns:repeat(4,1fr)}}
-  .sk{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px}
-  .sk h3{font-size:.8rem;letter-spacing:.14em;color:var(--accent-2);margin-bottom:14px;text-transform:uppercase}
-  .sk ul{list-style:none;display:grid;gap:10px}
-  .sk li{display:flex;justify-content:space-between;gap:10px;align-items:baseline;border-bottom:1px solid #f0f3f7;padding-bottom:8px}
+  .sk{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+  .sk h3{font-size:.8125rem;letter-spacing:.08em;color:var(--accent);margin-bottom:16px;text-transform:uppercase}
+  .sk ul{list-style:none;display:grid;gap:8px}
+  .sk li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 16px;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:8px}
   .sk li:last-child{border-bottom:none;padding-bottom:0}
-  .sk li b{color:var(--ink);font-size:.95rem}
-  .sk li span{color:var(--muted);font-size:.76rem;text-align:right}
+  .sk li b{font-size:.9375rem}
+  .sk li span{color:var(--muted);font-size:.8125rem}
 
-  /* 経歴 */
-  .about-grid{display:grid;gap:28px}
-  @media (min-width:900px){.about-grid{grid-template-columns:1.3fr .7fr}}
-  .timeline{list-style:none;position:relative;padding-left:30px}
-  .timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--accent),var(--line))}
-  .timeline li{position:relative;padding-bottom:28px}
+  /* About */
+  .about-grid{display:grid;gap:40px;align-items:start}
+  @media (min-width:900px){.about-grid{grid-template-columns:1.2fr .8fr;gap:64px}}
+  .timeline{list-style:none;position:relative;padding-left:32px}
+  .timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
+  .timeline li{position:relative;padding-bottom:32px}
   .timeline li:last-child{padding-bottom:0}
-  .timeline li::before{content:"";position:absolute;left:-28px;top:6px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--accent)}
-  .t-when{font-size:.8rem;font-weight:800;color:var(--accent-2)}
-  .t-what{font-weight:800;color:var(--ink);line-height:1.5}
-  .t-note{font-size:.9rem;color:var(--muted)}
-  .award{border-radius:var(--radius);padding:30px 26px;color:#fff;background:linear-gradient(150deg,#14213a,#0b1424);position:relative;overflow:hidden}
-  .award::after{content:"🏆";position:absolute;right:-6px;bottom:-14px;font-size:6rem;opacity:.12}
-  .award .eyebrow{color:var(--gold)}
-  .award-photo{margin:-30px -26px 22px;aspect-ratio:4/3;overflow:hidden;background:#1b2b47;position:relative}
+  .timeline li::before{content:"";position:absolute;left:-32px;top:8px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+  .t-when{font-size:var(--fs-small);font-weight:700;color:var(--accent)}
+  .t-what{font-weight:700;line-height:1.5}
+  .t-note{font-size:.9375rem;color:var(--muted)}
+  .award{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
+  .award-photo{aspect-ratio:4/3;overflow:hidden;background:var(--bg)}
   .award-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 45%}
-  .award-photo::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(transparent,rgba(11,20,36,.85))}
-  .award-photo figcaption{position:absolute;left:16px;bottom:10px;z-index:1;font-size:.72rem;color:#d7e0ec;font-weight:600}
-  .award h3{font-size:1.25rem;margin-bottom:10px;line-height:1.5}
-  .award p{color:#b9c6d8;font-size:.92rem}
-  .lang{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px 26px}
-  .lang h3{font-size:.8rem;letter-spacing:.14em;color:var(--accent-2);margin-bottom:10px}
-  .lang div{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f0f3f7;font-size:.92rem}
+  .award figcaption{padding:8px 24px 0;font-size:.8125rem;color:var(--muted)}
+  .award-body{padding:24px}
+  .award h3{font-size:var(--fs-h3);margin-bottom:8px;line-height:1.5}
+  .award p{color:var(--muted);font-size:.9375rem}
+  .lang{margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+  .lang h3{font-size:.8125rem;letter-spacing:.08em;color:var(--accent);margin-bottom:8px}
+  .lang div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:.9375rem}
   .lang div:last-child{border-bottom:none}
   .lang span{color:var(--muted)}
 
-  /* ビジョン */
-  .vision{background:var(--ink);color:#fff;text-align:center;position:relative;overflow:hidden}
-  .vision::before{content:"";position:absolute;inset:auto -20% -60% -20%;height:120%;background:radial-gradient(closest-side,rgba(16,163,127,.35),transparent);pointer-events:none}
-  .vision .wrap{position:relative;max-width:760px}
-  .vision h2{font-size:clamp(1.5rem,4vw,2.2rem);line-height:1.55;margin:8px 0 18px}
-  .vision p{color:#b9c6d8}
+  /* Hello */
+  #hello{padding-top:0}
+  .hello-grid{display:grid;gap:24px}
+  @media (min-width:900px){.hello-grid{grid-template-columns:1.1fr .9fr}}
+  .code{background:var(--surface);border-radius:var(--r);border:1px solid var(--line);overflow:hidden}
+  .code pre{margin:0;padding:24px;overflow-x:auto;font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace;font-size:.8125rem;line-height:1.9;color:var(--ink)}
+  .code .m{color:var(--muted)}
+  .journey{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+  .journey h3{font-size:.8125rem;letter-spacing:.08em;color:var(--accent);margin-bottom:4px}
+  .journey p.j-lead{color:var(--muted);font-size:.9375rem;margin-bottom:8px}
+  .journey svg{width:100%;height:auto;display:block}
+  .j-path{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-dasharray:2 6}
+  .j-label{font-size:14px;font-weight:700;fill:#1c2024}
+  .j-sub{font-size:11.5px;font-weight:400;fill:#5a636b}
 
-  footer{background:var(--ink);color:#6f7f97;text-align:center;font-size:.8rem;padding:0 0 40px}
+  /* Vision */
+  .vision{background:var(--dark);color:#fff}
+  .vision .wrap>*{max-width:720px}
+  .vision .eyebrow{color:#7fcfb9}
+  .vision h2{font-size:var(--fs-h2);line-height:1.6;margin:0 0 16px}
+  .vision p{color:#c3c9cf}
 
-  /* 出現アニメーション */
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
-  .reveal.in{opacity:1;transform:none}
+  footer{background:var(--dark);color:#98a1a9;font-size:.8125rem;padding:24px 0;border-top:1px solid #2e353b}
+  footer .wrap{text-align:center}
+
+  .to-top{position:fixed;right:16px;bottom:16px;z-index:60;width:48px;height:48px;border-radius:var(--r-sm);border:1px solid var(--line);cursor:pointer;background:var(--surface);color:var(--ink);font-size:1.125rem;line-height:1;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .3s}
+  .to-top.show{opacity:1;pointer-events:auto}
+  .to-top:hover{border-color:var(--ink)}
+
+  /* Fade-in only */
+  .js .reveal{opacity:0;transition:opacity .6s ease}
+  .js .reveal.in{opacity:1}
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    .reveal{opacity:1;transform:none;transition:none}
-    .status i{animation:none}
-  }
-  :focus-visible{outline:3px solid #3fe0b0;outline-offset:3px;border-radius:6px}
-
-  /* トップへ戻る */
-  .to-top{position:fixed;right:18px;bottom:18px;z-index:60;width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;background:var(--accent);color:#fff;font-size:1.3rem;font-weight:800;box-shadow:0 10px 24px -8px rgba(16,163,127,.8);display:grid;place-items:center;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .3s,transform .3s,background .2s}
-  .to-top.show{opacity:1;transform:none;pointer-events:auto}
-  .to-top:hover{background:var(--accent-2)}
-
-  /* ===== アニメーション・追加パーツ ===== */
-  .progress{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#3fe0b0,#7fb6ff);z-index:70}
-  #net{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-  .hero .orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;z-index:0;pointer-events:none;animation:drift 18s ease-in-out infinite alternate}
-  .hero .orb.o1{width:420px;height:420px;background:#10a37f;top:-120px;right:-80px}
-  .hero .orb.o2{width:360px;height:360px;background:#3f6bff;bottom:-160px;left:-120px;animation-duration:22s;opacity:.35}
-  @keyframes drift{to{transform:translate(-60px,50px) scale(1.15)}}
-
-  /* ヒーローの登場 */
-  .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.06em}
-  .w>span{display:inline-block;animation:wordUp 1.1s cubic-bezier(.2,.8,.2,1) both}
-  .w:nth-of-type(2)>span{animation-delay:.12s}
-  @keyframes wordUp{from{transform:translateY(110%)}to{transform:none}}
-  .intro{animation:rise .9s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s)}
-  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-  .portrait{animation:popIn 1.1s .35s cubic-bezier(.2,.9,.25,1.15) both}
-  @keyframes popIn{from{opacity:0;transform:scale(.86) rotate(-3deg)}to{opacity:1;transform:none}}
-  .badge{animation:bob 5s ease-in-out infinite}
-  .badge.b2{animation-delay:-2.5s}
-  @keyframes bob{50%{transform:translateY(-8px)}}
-
-  /* タイプライター */
-  .typed{color:#fff;font-weight:800}
-  .caret{display:inline-block;width:2px;height:1.05em;background:#3fe0b0;margin:0 6px 0 2px;vertical-align:-.15em;animation:blink 1s steps(1) infinite}
-  @keyframes blink{50%{opacity:0}}
-
-  /* スクロールの合図 */
-  .scroll-hint{position:absolute;left:50%;bottom:66px;transform:translateX(-50%);z-index:2;width:26px;height:42px;border:2px solid rgba(255,255,255,.35);border-radius:14px;display:none}
-  .scroll-hint::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:#3fe0b0;animation:wheel 1.8s ease-in-out infinite}
-  @keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
-  @media (min-width:900px) and (min-height:760px){.scroll-hint{display:block}}
-
-  /* 技術マーキー */
-  .marquee{overflow:hidden;padding:30px 0 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-  .marquee-track{display:flex;gap:14px;width:max-content;animation:marq 32s linear infinite}
-  .marquee:hover .marquee-track{animation-play-state:paused}
-  .marquee span{white-space:nowrap;font-weight:800;font-size:.95rem;color:var(--ink-2);background:#fff;border:1px solid var(--line);padding:10px 18px;border-radius:999px;display:inline-flex;gap:8px;align-items:center}
-  .marquee span i{font-style:normal}
-  @keyframes marq{to{transform:translateX(-50%)}}
-
-  /* reveal の種類 */
-  .reveal.from-left{transform:translateX(-40px)}
-  .reveal.from-right{transform:translateX(40px)}
-  .reveal.zoom{transform:scale(.92)}
-  .reveal.in.from-left,.reveal.in.from-right,.reveal.in.zoom{transform:none}
-
-  /* カードの光 */
-  .s-card,.mini,.sk{position:relative;overflow:hidden}
-  .s-card::after,.mini::after,.sk::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(16,163,127,.14),transparent 60%)}
-  .s-card:hover::after,.mini:hover::after,.sk:hover::after{opacity:1}
-  .s-icon{transition:transform .4s cubic-bezier(.2,.9,.25,1.4)}
-  .s-card:hover .s-icon{transform:rotate(-8deg) scale(1.12)}
-
-  /* 3Dチルト */
-  .tilt{transition:transform .25s ease;transform-style:preserve-3d;will-change:transform}
-  .p-visual .phone.front{animation:floatA 6s ease-in-out infinite}
-  .p-visual .phone.back{animation:floatB 7s ease-in-out infinite}
-  @keyframes floatA{0%,100%{transform:translateY(-10px) rotate(-3deg)}50%{transform:translateY(-24px) rotate(-1.5deg)}}
-  @keyframes floatB{0%,100%{transform:translateY(28px) rotate(4deg)}50%{transform:translateY(16px) rotate(5.5deg)}}
-
-  /* コードで自己紹介 + 旅の地図 */
-  #hello{padding-top:0}
-  .hello-grid{display:grid;gap:22px}
-  @media (min-width:900px){.hello-grid{grid-template-columns:1.1fr .9fr}}
-  .code{background:#0d1626;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;border:1px solid #1d2a40}
-  .code-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;background:#111d31;border-bottom:1px solid #1d2a40}
-  .code-bar i{width:11px;height:11px;border-radius:50%;background:#ff5f57}
-  .code-bar i:nth-child(2){background:#febc2e}.code-bar i:nth-child(3){background:#28c840}
-  .code-bar span{margin-left:10px;font-size:.78rem;color:#7f8ea6;font-family:ui-monospace,Menlo,Consolas,monospace}
-  .code pre{margin:0;padding:20px 18px 24px;overflow-x:auto;font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace;font-size:.84rem;line-height:1.9;color:#d7e0ec}
-  .ln{display:block;white-space:pre;overflow:hidden;width:0}
-  .code.play .ln{animation:typeLine var(--t,.6s) steps(var(--w,20)) forwards;animation-delay:var(--dl,0s)}
-  @keyframes typeLine{to{width:calc(var(--w,20) * 1ch)}}
-  .code .k{color:#c792ea}.code .c{color:#82aaff}.code .s{color:#c3e88d}.code .p{color:#89ddff}.code .m{color:#5d6f8a}
-  .code .cursor{display:inline-block;width:8px;height:1.1em;background:#3fe0b0;vertical-align:-.2em;animation:blink 1s steps(1) infinite}
-  @media (max-width:520px){.code pre{font-size:.7rem;padding:16px 12px}}
-
-  .journey{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;position:relative;overflow:hidden}
-  .journey h3{font-size:.8rem;letter-spacing:.14em;color:var(--accent-2);margin-bottom:6px}
-  .journey p.j-lead{color:var(--muted);font-size:.9rem;margin-bottom:8px}
-  .journey svg{width:100%;height:auto;display:block}
-  .j-path{fill:none;stroke:url(#jg);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.6s cubic-bezier(.6,.1,.2,1)}
-  .journey.in .j-path{stroke-dashoffset:0}
-  .j-dot{opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(0);transition:opacity .4s,transform .5s cubic-bezier(.2,.9,.25,1.6)}
-  .journey.in .j-dot{opacity:1;transform:none}
-  .journey.in .j-dot.d2{transition-delay:1.2s}.journey.in .j-dot.d3{transition-delay:2.4s}
-  .j-ring{fill:none;stroke:#10a37f;stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center}
-  .journey.in .j-ring{animation:ring 2.2s 2.6s ease-out infinite}
-  @keyframes ring{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(3)}}
-  .j-label{font-size:13px;font-weight:800;fill:#0b1424}
-  .j-sub{font-size:10.5px;font-weight:600;fill:#5d6a7e}
-  .j-plane{opacity:0}
-  .journey.in .j-plane{opacity:1;offset-path:var(--jp);animation:fly 2.6s cubic-bezier(.6,.1,.2,1) forwards}
-  @keyframes fly{0%{offset-distance:0%;opacity:1}90%{opacity:1}100%{offset-distance:100%;opacity:0}}
-
-  /* ボタンのきらめき */
-  .btn-primary{position:relative;overflow:hidden}
-  .btn-primary::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:shine 3.8s 2s ease-in-out infinite}
-  @keyframes shine{0%{left:-60%}35%,100%{left:130%}}
-
-  @media (prefers-reduced-motion:reduce){
-    .w>span,.intro,.portrait,.badge,.marquee-track,.p-visual .phone,.btn-primary::after,.hero .orb,.scroll-hint::after,.caret{animation:none!important}
-    .ln{width:auto!important}
-    .j-path{stroke-dashoffset:0;transition:none}
-    .j-dot{opacity:1;transform:none;transition:none}
-    .j-plane{display:none}
+    .js .reveal{opacity:1;transition:none}
   }
 </style>
 </head>
 <body>
-<div class="progress" id="progress" aria-hidden="true"></div>
 
 <nav class="nav" id="nav" aria-label="メインメニュー">
   <div class="wrap">
-    <a class="brand en" href="#top"><span class="brand-mark">O</span>Okiljon Nabev</a>
+    <a class="brand en" href="#top">Okiljon Nabev</a>
     <ul>
       <li><a href="#strengths">強み</a></li>
       <li><a href="#works">制作実績</a></li>
       <li><a href="#skills">スキル</a></li>
       <li><a href="#about">経歴</a></li>
-      <li><a href="https://github.com/okiljon04344/okiljon04344/blob/main/CAREER_SHEET_JA.md" target="_blank" rel="noopener noreferrer" style="color:#3fe0b0;font-weight:bold;">職務経歴書 📄</a></li>
+      <li><a class="strong" href="https://github.com/okiljon04344/okiljon04344/blob/main/SKILL_SHEET_JA.md" target="_blank" rel="noopener noreferrer">開発経歴書</a></li>
       <li><a href="https://github.com/okiljon04344" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
     </ul>
   </div>
@@ -367,43 +244,41 @@
 
 <!-- 1. 名前とひとこと -->
 <header class="hero" id="top">
-  <span class="orb o1" aria-hidden="true"></span><span class="orb o2" aria-hidden="true"></span>
-  <canvas id="net" aria-hidden="true"></canvas>
   <div class="wrap hero-grid">
     <div>
-      <span class="status intro" style="--d:.05s"><i></i>2027年4月入社に向けて就職活動中</span>
-      <h1 class="en" aria-label="Okiljon Nabev"><span class="w"><span>Okiljon</span></span><br><span class="w"><span>Nabev</span></span></h1>
-      <p class="role intro" style="--d:.45s"><span class="typed" id="typed">Flutter Engineer</span><span class="caret" aria-hidden="true"></span>／ IT専門学校生（2027年3月卒業見込）</p>
-      <p class="catch intro" style="--d:.6s">アイデアを、<em>チームで動くアプリ</em>に。</p>
-      <p class="lead intro" style="--d:.75s">ウズベキスタン・ナマンガン出身。北海道の専門学校でITを学びながら、Flutter・Firebase・生成AIを使ったアプリを独学で開発しています。実案件ではPMとして4人のチームをまとめ、お客様にアプリを届けました。</p>
-      <div class="cta intro" style="--d:.9s">
+      <span class="status"><i aria-hidden="true"></i>2027年4月入社に向けて就職活動中</span>
+      <h1 class="en" aria-label="Okiljon Nabev">Okiljon<br>Nabev</h1>
+      <p class="role"><b>Flutter Engineer</b> ／ IT専門学校生（2027年3月卒業見込）</p>
+      <p class="catch">アイデアを、<em>チームで動くアプリ</em>に。</p>
+      <p class="lead">ウズベキスタン・ナマンガン出身。北海道の専門学校でITを学びながら、Flutter・Firebase・生成AIを使ったアプリを独学で開発しています。実案件ではPMとして4人のチームをまとめ、お客様にアプリを届けました。</p>
+      <div class="cta">
         <a class="btn btn-primary" href="#works">制作実績を見る →</a>
-        <a class="btn btn-ghost" href="https://github.com/okiljon04344/okiljon04344/blob/main/CAREER_SHEET_JA.md" target="_blank" rel="noopener noreferrer" style="border-color:rgba(63,224,176,.5);color:#3fe0b0;">職務経歴書 (Career Sheet) 📄</a>
-        <a class="btn btn-ghost" href="https://github.com/okiljon04344" target="_blank" rel="noopener noreferrer">GitHub Profile ↗</a>
+        <a class="btn" href="https://github.com/okiljon04344/okiljon04344/blob/main/SKILL_SHEET_JA.md" target="_blank" rel="noopener noreferrer">開発経歴書</a>
+        <a class="btn" href="https://github.com/okiljon04344" target="_blank" rel="noopener noreferrer">GitHub Profile ↗</a>
       </div>
     </div>
     <div class="portrait">
       <div class="portrait-frame"><img src="photo1.jpg" alt="Okiljon Nabev のプロフィール写真" onerror="this.style.display='none'"></div>
-      <div class="badge b1"><span>🇯🇵</span><div>JLPT N2<small>日本語で学業・仕事</small></div></div>
-      <div class="badge b2"><span>📱</span><div>Flutter<small>Mobile / Web / Desktop</small></div></div>
+      <div class="portrait-facts">
+        <div class="pf">JLPT N2<small>日本語で学業・仕事</small></div>
+        <div class="pf">Flutter<small>Mobile / Web / Desktop</small></div>
+      </div>
     </div>
   </div>
-  <span class="scroll-hint" aria-hidden="true"></span>
 </header>
 
 <div class="stats">
   <div class="wrap">
     <div class="stats-grid">
-      <div class="stat"><b class="en"><span class="count" data-to="4">4</span><small>名</small></b><span>チームPMとして実案件を担当</span></div>
-      <div class="stat"><b class="en"><span class="count" data-to="6">6</span><small>か月</small></b><span>お客様向けアプリの開発期間</span></div>
+      <div class="stat"><b class="en">4<small>名</small></b><span>チームPMとして実案件を担当</span></div>
+      <div class="stat"><b class="en">6<small>か月</small></b><span>お客様向けアプリの開発期間</span></div>
       <div class="stat"><b class="en">N2</b><span>日本語能力試験</span></div>
-      <div class="stat"><b class="en"><span class="count" data-to="1">1</span><small>位</small></b><span>4か国の国際ビジネスアイデアコンテスト</span></div>
+      <div class="stat"><b class="en">1<small>位</small></b><span>4か国の国際ビジネスアイデアコンテスト</span></div>
     </div>
+    <ul class="tech" aria-label="使っている技術">
+      <li>Flutter</li><li>Dart</li><li>Riverpod</li><li>go_router</li><li>Firebase</li><li>Cloud Firestore</li><li>Cloud Messaging</li><li>Gemini API</li><li>Python</li><li>Java</li><li>PM</li><li>JLPT N2</li>
+    </ul>
   </div>
-</div>
-
-<div class="marquee" aria-label="使っている技術">
-  <div class="marquee-track"><span><i aria-hidden="true">📱</i>Flutter</span><span><i aria-hidden="true">🎯</i>Dart</span><span><i aria-hidden="true">🌊</i>Riverpod</span><span><i aria-hidden="true">🧭</i>go_router</span><span><i aria-hidden="true">🔥</i>Firebase</span><span><i aria-hidden="true">🗄️</i>Cloud Firestore</span><span><i aria-hidden="true">🔔</i>Cloud Messaging</span><span><i aria-hidden="true">✨</i>Gemini API</span><span><i aria-hidden="true">🐍</i>Python</span><span><i aria-hidden="true">☕</i>Java</span><span><i aria-hidden="true">🤝</i>PM</span><span><i aria-hidden="true">🇯🇵</i>JLPT N2</span><span aria-hidden="true"><i aria-hidden="true">📱</i>Flutter</span><span aria-hidden="true"><i aria-hidden="true">🎯</i>Dart</span><span aria-hidden="true"><i aria-hidden="true">🌊</i>Riverpod</span><span aria-hidden="true"><i aria-hidden="true">🧭</i>go_router</span><span aria-hidden="true"><i aria-hidden="true">🔥</i>Firebase</span><span aria-hidden="true"><i aria-hidden="true">🗄️</i>Cloud Firestore</span><span aria-hidden="true"><i aria-hidden="true">🔔</i>Cloud Messaging</span><span aria-hidden="true"><i aria-hidden="true">✨</i>Gemini API</span><span aria-hidden="true"><i aria-hidden="true">🐍</i>Python</span><span aria-hidden="true"><i aria-hidden="true">☕</i>Java</span><span aria-hidden="true"><i aria-hidden="true">🤝</i>PM</span><span aria-hidden="true"><i aria-hidden="true">🇯🇵</i>JLPT N2</span></div>
 </div>
 
 <main>
@@ -417,17 +292,17 @@
       </div>
       <div class="strengths">
         <article class="s-card reveal">
-          <div class="s-icon" aria-hidden="true">🧭</div>
+          <span class="s-num en" aria-hidden="true">01</span>
           <h3>実案件でのプロジェクトマネジメント</h3>
           <p>4人チームのPMとして、韓国で事業を行う企業のスマホアプリを約6か月で開発し、お客様に高い満足をいただきました。</p>
         </article>
         <article class="s-card reveal">
-          <div class="s-icon" aria-hidden="true">🔥</div>
+          <span class="s-num en" aria-hidden="true">02</span>
           <h3>自分で学び続ける力</h3>
           <p>高校2年生からJavaを独学。その後もITの勉強を続け、現在はFlutter・Riverpod・Firebaseを使いアプリを作っています。</p>
         </article>
         <article class="s-card reveal">
-          <div class="s-icon" aria-hidden="true">🤖</div>
+          <span class="s-num en" aria-hidden="true">03</span>
           <h3>生成AIをプロダクトに組み込む</h3>
           <p>Gemini APIを使ったAIチャットやテスト問題の自動生成など、AIを「使う」だけでなく、アプリの機能として「組み込む」開発に取り組んでいます。</p>
         </article>
@@ -446,12 +321,12 @@
       </div>
 
       <!-- Million Halal -->
-      <article class="project reveal zoom">
-        <div class="p-visual v-halal tilt">
+      <article class="project reveal">
+        <div class="p-visual has-logo">
           <div class="logo"><img src="photo2.jpg" alt="Million Halal のロゴ" onerror="this.style.display='none'"></div>
-          <div class="phone back"><img src="photo6.jpg" alt="Million Halal の商品一覧画面" onerror="this.style.visibility='hidden'"></div>
-          <div class="phone front"><img src="photo5.jpg" alt="Million Halal のホーム画面" onerror="this.style.visibility='hidden'"></div>
-          <div class="tag-float">🤝 クライアントワーク（商用案件）</div>
+          <div class="phone"><img src="photo6.jpg" alt="Million Halal の商品一覧画面" onerror="this.style.visibility='hidden'"></div>
+          <div class="phone"><img src="photo5.jpg" alt="Million Halal のホーム画面" onerror="this.style.visibility='hidden'"></div>
+          <div class="caption">クライアントワーク（商用案件）</div>
         </div>
         <div>
           <span class="p-label">Team Project ・ PM</span>
@@ -468,15 +343,15 @@
             <div class="fact"><b>約6か月</b><span>開発期間</span></div>
             <div class="fact"><b>PM</b><span>担当</span></div>
           </div>
-          <div class="chips"><span class="chip">プロジェクト管理</span><span class="chip">チーム開発</span><span class="chip">モバイルアプリ</span><span class="chip" style="background:rgba(255,255,255,.08);color:#a8b3cf;">🔒 コード非公開（商用案件）</span></div>
+          <div class="chips"><span class="chip">プロジェクト管理</span><span class="chip">チーム開発</span><span class="chip">モバイルアプリ</span><span class="chip">コード非公開（商用案件）</span></div>
         </div>
       </article>
 
       <!-- EduPlanner AI -->
       <article class="project flip reveal">
-        <div class="p-visual v-edu tilt">
-          <div class="phone back"><img src="photo4.jpg" alt="EduPlanner AI のテスト問題生成画面" onerror="this.style.visibility='hidden'"></div>
-          <div class="phone front"><img src="photo3.jpg" alt="EduPlanner AI のホーム画面" onerror="this.style.visibility='hidden'"></div>
+        <div class="p-visual">
+          <div class="phone"><img src="photo4.jpg" alt="EduPlanner AI のテスト問題生成画面" onerror="this.style.visibility='hidden'"></div>
+          <div class="phone"><img src="photo3.jpg" alt="EduPlanner AI のホーム画面" onerror="this.style.visibility='hidden'"></div>
         </div>
         <div>
           <span class="p-label">個人開発 ・ 自主プロジェクト</span>
@@ -489,27 +364,24 @@
             <li>Googleログイン、Firestoreでのデータ保存、プッシュ通知</li>
           </ul>
           <div class="chips"><span class="chip">Flutter</span><span class="chip">Riverpod</span><span class="chip">go_router</span><span class="chip">Firebase Auth</span><span class="chip">Cloud Firestore</span><span class="chip">FCM</span><span class="chip">Gemini API</span></div>
-          <div style="margin-top:16px"><a class="btn btn-ghost" style="border-color:var(--line);color:var(--ink);padding:8px 18px;font-size:.85rem" href="https://github.com/okiljon04344/eduplaner_ai" target="_blank" rel="noopener noreferrer">GitHub リポジトリを見る ↗</a></div>
+          <div style="margin-top:24px"><a class="btn btn-sm" href="https://github.com/okiljon04344/eduplaner_ai" target="_blank" rel="noopener noreferrer">GitHub リポジトリを見る ↗</a></div>
         </div>
       </article>
 
       <div class="mini-grid">
         <article class="mini reveal">
-          <div class="m-ico" aria-hidden="true">🌾</div>
           <h4>アグリAI</h4>
           <p class="m-sub">デスクトップアプリ ・ 個人開発</p>
           <p>農家の方向けのAIアシスタント。酪農・作物・飼料などの相談に答えるデスクトップアプリです。</p>
           <div class="chips"><span class="chip">Flutter</span><span class="chip">AI</span></div>
         </article>
         <article class="mini reveal">
-          <div class="m-ico" aria-hidden="true">🌐</div>
           <h4>PolyglotX</h4>
           <p class="m-sub">モバイルアプリ ・ 開発中</p>
           <p>複数の言語に対応した語学学習アプリを開発中です。</p>
           <div class="chips"><span class="chip">Flutter</span><span class="chip">多言語対応</span></div>
         </article>
         <article class="mini reveal">
-          <div class="m-ico" aria-hidden="true">💬</div>
           <h4>リアルタイムチャット</h4>
           <p class="m-sub">学習用 ・ 個人開発</p>
           <p>学習のために、FlutterとFirebaseで作ったチャットアプリです。</p>
@@ -571,7 +443,7 @@
         <h2>経歴</h2>
       </div>
       <div class="about-grid">
-        <ol class="timeline reveal from-left">
+        <ol class="timeline reveal">
           <li>
             <div class="t-when en">2025.04 — 2027.03（見込）</div>
             <div class="t-what">岩谷学園 ひがし北海道IT専門学校</div>
@@ -590,10 +462,13 @@
         </ol>
         <div class="reveal">
           <div class="award">
-            <figure class="award-photo"><img src="photo7.jpg" alt="国際ビジネスアイデアコンテストの受賞時、賞品を持つメンバー" loading="lazy" onerror="this.parentNode.style.display='none'"><figcaption>受賞時の記念写真</figcaption></figure>
-            <span class="eyebrow en">Award</span>
-            <h3>国際ビジネスアイデアコンテスト<br>チームで第1位</h3>
-            <p>ロシア・カザフスタン・キルギス・ウズベキスタンの4か国が参加。メンタルヘルスをチェックし、医師につなぐアプリのアイデアを提案しました。</p>
+            <figure class="award-photo"><img src="photo7.jpg" alt="国際ビジネスアイデアコンテストの受賞時、賞品を持つメンバー" loading="lazy" onerror="this.parentNode.style.display='none'"></figure>
+            <figcaption>受賞時の記念写真</figcaption>
+            <div class="award-body">
+              <span class="eyebrow en">Award</span>
+              <h3>国際ビジネスアイデアコンテスト<br>チームで第1位</h3>
+              <p>ロシア・カザフスタン・キルギス・ウズベキスタンの4か国が参加。メンタルヘルスをチェックし、医師につなぐアプリのアイデアを提案しました。</p>
+            </div>
           </div>
           <div class="lang">
             <h3 class="en">LANGUAGES</h3>
@@ -614,31 +489,35 @@
         <p>エンジニアらしく、自分のことを Dart のクラスで書いてみました。</p>
       </div>
       <div class="hello-grid">
-        <div class="code reveal from-left" id="code">
-          <div class="code-bar"><i></i><i></i><i></i><span>okiljon.dart</span></div>
-<pre><span class="ln"><span class="k">class</span> <span class="c">Okiljon</span> <span class="k">extends</span> <span class="c">Engineer</span> {</span><span class="ln">  <span class="k">final</span> from    = <span class="s">'Namangan, Uzbekistan'</span>;</span><span class="ln">  <span class="k">final</span> basedIn = <span class="s">'Nakashibetsu, Hokkaido'</span>;</span><span class="ln">  <span class="k">final</span> speaks  = [<span class="s">'Uzbek'</span>, <span class="s">'Japanese (N2)'</span>];</span><span class="ln">  <span class="k">final</span> stack   = [<span class="s">'Flutter'</span>, <span class="s">'Riverpod'</span>,</span><span class="ln">                   <span class="s">'Firebase'</span>, <span class="s">'Gemini API'</span>];</span><span class="ln">  <span class="k">final</span> roles   = [<span class="s">'Developer'</span>, <span class="s">'PM'</span>];</span><span class="ln"> </span><span class="ln">  <span class="m">// 2027年3月 卒業見込</span></span><span class="ln">  <span class="p">@override</span></span><span class="ln">  <span class="c">String</span> <span class="k">get</span> mission =&gt;</span><span class="ln">      <span class="s">'アイデアを、チームで動くアプリに。'</span>;</span><span class="ln">}<span class="cursor" aria-hidden="true"></span></span></pre>
+        <div class="code reveal" id="code">
+<pre>class Okiljon extends Engineer {
+  final from    = 'Namangan, Uzbekistan';
+  final basedIn = 'Nakashibetsu, Hokkaido';
+  final speaks  = ['Uzbek', 'Japanese (N2)'];
+  final stack   = ['Flutter', 'Riverpod',
+                   'Firebase', 'Gemini API'];
+  final roles   = ['Developer', 'PM'];
+
+  <span class="m">// 2027年3月 卒業見込</span>
+  @override
+  String get mission =&gt;
+      'アイデアを、チームで動くアプリに。';
+}</pre>
         </div>
-        <div class="journey reveal from-right" id="journey">
+        <div class="journey reveal" id="journey">
           <h3 class="en">MY JOURNEY</h3>
           <p class="j-lead">ナマンガンから、横浜、そして北海道・中標津へ。</p>
           <svg viewBox="0 0 400 300" role="img" aria-label="ナマンガン（ウズベキスタン）から横浜、中標津への移動を示す図">
-            <defs>
-              <linearGradient id="jg" x1="0" x2="1"><stop offset="0" stop-color="#10a37f"/><stop offset="1" stop-color="#3f78ff"/></linearGradient>
-              <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#dfe6ee"/></pattern>
-            </defs>
-            <rect width="400" height="300" fill="url(#dots)"/>
-            <path class="j-path" pathLength="1" d="M60 210 C 120 70, 240 80, 290 190 C 300 140, 322 98, 345 75"/>
-            <g class="j-dot d1"><circle cx="60" cy="210" r="9" fill="#10a37f"/><circle cx="60" cy="210" r="4" fill="#fff"/></g>
-            <g class="j-dot d2"><circle cx="290" cy="190" r="9" fill="#2f8fd0"/><circle cx="290" cy="190" r="4" fill="#fff"/></g>
-            <g class="j-dot d3"><circle cx="345" cy="75" r="9" fill="#3f78ff"/><circle cx="345" cy="75" r="4" fill="#fff"/></g>
-            <circle class="j-ring" cx="345" cy="75" r="9"/>
-            <text class="j-label" x="38" y="240">🇺🇿 Namangan</text>
-            <text class="j-sub" x="38" y="256">〜2022 出身・中等学校</text>
-            <text class="j-label" x="222" y="222">Yokohama</text>
-            <text class="j-sub" x="222" y="238">2023–2025 日本語科・PM</text>
-            <text class="j-label" x="244" y="40">Nakashibetsu 🇯🇵</text>
-            <text class="j-sub" x="244" y="56">2025– IT専門学校</text>
-            <text class="j-plane" font-size="20" x="0" y="0" style="--jp:path('M60 210 C 120 70, 240 80, 290 190 C 300 140, 322 98, 345 75')">✈️</text>
+            <path class="j-path" d="M60 210 C 120 70, 240 80, 290 190 C 300 140, 322 98, 345 75"/>
+            <circle cx="60" cy="210" r="6" fill="#0b7a62"/>
+            <circle cx="290" cy="190" r="6" fill="#0b7a62"/>
+            <circle cx="345" cy="75" r="6" fill="#0b7a62"/>
+            <text class="j-label" x="38" y="240">Namangan</text>
+            <text class="j-sub" x="38" y="258">〜2022 出身・中等学校</text>
+            <text class="j-label" x="200" y="222">Yokohama</text>
+            <text class="j-sub" x="200" y="240">2023–2025 日本語科・PM</text>
+            <text class="j-label" x="236" y="40">Nakashibetsu</text>
+            <text class="j-sub" x="236" y="58">2025– IT専門学校</text>
           </svg>
         </div>
       </div>
@@ -658,156 +537,29 @@
 
 <button class="to-top" id="toTop" type="button" aria-label="ページのトップへ戻る">↑</button>
 
-<footer><span class="en">© 2026 Okiljon Nabev</span></footer>
+<footer><div class="wrap"><span class="en">© 2026 Okiljon Nabev</span></div></footer>
 
 <script>
-  // ナビ：スクロールで背景をつける
   (function(){
-    var nav=document.getElementById('nav');
     var toTop=document.getElementById('toTop');
-    function onScroll(){
-      if(nav){ nav.classList.toggle('scrolled', window.scrollY>40); }
-      if(toTop){ toTop.classList.toggle('show', window.scrollY>600); }
+    if(toTop){
+      toTop.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+      var onScroll=function(){ toTop.classList.toggle('show', window.scrollY>600); };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
     }
-    if(toTop){ toTop.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); }); }
-    window.addEventListener('scroll', onScroll, {passive:true});
-    onScroll();
-  })();
-  // 出現アニメーション（対応していないブラウザではすぐ表示）
-  (function(){
+
     var items=document.querySelectorAll('.reveal');
-    if(!('IntersectionObserver' in window)){ items.forEach(function(el){el.classList.add('in');}); return; }
+    if(!('IntersectionObserver' in window)){
+      items.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
     var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
     },{threshold:.12});
     items.forEach(function(el){ io.observe(el); });
-  })();
-
-  // ===== 追加アニメーション =====
-  (function(){
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var finePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
-
-    // スクロール進捗バー
-    var bar=document.getElementById('progress');
-    function prog(){
-      if(!bar) return;
-      var h=document.documentElement.scrollHeight-window.innerHeight;
-      bar.style.transform='scaleX('+(h>0?Math.min(1,window.scrollY/h):0)+')';
-    }
-    window.addEventListener('scroll',prog,{passive:true}); prog();
-
-    // 同じグループ内の reveal を少しずつ遅らせる
-    document.querySelectorAll('.strengths,.skill-grid,.mini-grid').forEach(function(g){
-      Array.prototype.forEach.call(g.children,function(el,i){ el.style.transitionDelay=(i*0.12)+'s'; });
-    });
-
-    // タイプライター（役割を切り替え）
-    var typed=document.getElementById('typed');
-    var words=['Flutter Engineer','Project Manager','AI × App Builder'];
-    if(typed && !reduce){
-      var wi=0, ci=words[0].length, del=true;
-      setTimeout(function tick(){
-        var w=words[wi];
-        if(del){ ci--; if(ci<=0){ del=false; wi=(wi+1)%words.length; } }
-        else { ci++; if(ci>=words[wi].length){ del=true; typed.textContent=words[wi]; return setTimeout(tick,2200); } }
-        typed.textContent=words[wi].slice(0,Math.max(0,ci));
-        setTimeout(tick, del?45:85);
-      },2600);
-    }
-
-    // 見えたら一度だけ実行するヘルパー
-    function onceVisible(el,fn,th){
-      if(!el) return;
-      if(!('IntersectionObserver' in window)){ fn(); return; }
-      var o=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ fn(); o.disconnect(); } }); },{threshold:th||.3});
-      o.observe(el);
-    }
-
-    // 数字のカウントアップ
-    document.querySelectorAll('.count').forEach(function(el){
-      var to=parseInt(el.getAttribute('data-to'),10)||0;
-      if(reduce){ el.textContent=to; return; }
-      el.textContent='0';
-      onceVisible(el,function(){
-        var start=null, dur=1400;
-        function step(t){ if(!start) start=t; var p=Math.min(1,(t-start)/dur); el.textContent=Math.round(to*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(step); }
-        requestAnimationFrame(step);
-      },.6);
-    });
-
-    // コードのタイピング（全角は2文字分の幅）
-    var code=document.getElementById('code');
-    if(code){
-      var delay=0;
-      code.querySelectorAll('.ln').forEach(function(ln){
-        var w=0; var txt=ln.textContent;
-        for(var i=0;i<txt.length;i++){ w += txt.charCodeAt(i)>0x2e80 ? 2 : 1; }
-        w=Math.max(1,w);
-        var t=Math.min(1.1,0.02*w+0.1);
-        ln.style.setProperty('--w',w); ln.style.setProperty('--t',t+'s'); ln.style.setProperty('--dl',delay+'s');
-        delay+=t*0.6;
-      });
-      if(!reduce) onceVisible(code,function(){ code.classList.add('play'); },.35);
-    }
-
-    // 旅の地図
-    var j=document.getElementById('journey');
-    if(j){ if(reduce) j.classList.add('in'); else onceVisible(j,function(){ j.classList.add('in'); },.4); }
-
-    // カードの光（マウスの位置）
-    if(finePointer){
-      document.querySelectorAll('.s-card,.mini,.sk').forEach(function(c){
-        c.addEventListener('pointermove',function(e){ var r=c.getBoundingClientRect(); c.style.setProperty('--mx',(e.clientX-r.left)+'px'); c.style.setProperty('--my',(e.clientY-r.top)+'px'); });
-      });
-    }
-
-    // 3Dチルト
-    if(finePointer && !reduce){
-      document.querySelectorAll('.tilt').forEach(function(el){
-        el.addEventListener('pointermove',function(e){
-          var r=el.getBoundingClientRect(); var x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
-          el.style.transform='perspective(900px) rotateY('+(x*10)+'deg) rotateX('+(-y*10)+'deg)';
-        });
-        el.addEventListener('pointerleave',function(){ el.style.transform=''; });
-      });
-    }
-
-    // ヒーローのネットワーク背景（canvas）
-    var cv=document.getElementById('net');
-    if(cv && cv.getContext){
-      var ctx=cv.getContext('2d'), hero=cv.parentNode, pts=[], W=0, H=0, dpr=Math.min(2,window.devicePixelRatio||1), mouse={x:-999,y:-999}, running=true, raf=null;
-      function size(){
-        W=hero.clientWidth; H=hero.clientHeight;
-        cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
-        var n=Math.round(Math.min(70,Math.max(24,W*H/16000)));
-        pts=[]; for(var i=0;i<n;i++){ pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35}); }
-      }
-      function draw(){
-        ctx.clearRect(0,0,W,H);
-        for(var i=0;i<pts.length;i++){
-          var p=pts[i];
-          if(!reduce){ p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>W) p.vx*=-1; if(p.y<0||p.y>H) p.vy*=-1; }
-          var dxm=p.x-mouse.x, dym=p.y-mouse.y, dm=Math.sqrt(dxm*dxm+dym*dym);
-          ctx.fillStyle = dm<140 ? 'rgba(63,224,176,.9)' : 'rgba(150,190,230,.45)';
-          ctx.beginPath(); ctx.arc(p.x,p.y,dm<140?2.4:1.6,0,Math.PI*2); ctx.fill();
-          for(var k=i+1;k<pts.length;k++){
-            var q=pts[k], dx=p.x-q.x, dy=p.y-q.y, d=dx*dx+dy*dy;
-            if(d<14400){ ctx.strokeStyle='rgba(120,200,190,'+(0.18*(1-d/14400))+')'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke(); }
-          }
-          if(dm<140){ ctx.strokeStyle='rgba(63,224,176,'+(0.35*(1-dm/140))+')'; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke(); }
-        }
-        if(running && !reduce) raf=requestAnimationFrame(draw);
-      }
-      size(); draw();
-      var rt; window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ size(); if(reduce) draw(); },150); });
-      hero.addEventListener('pointermove',function(e){ var r=hero.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top; });
-      hero.addEventListener('pointerleave',function(){ mouse.x=mouse.y=-999; });
-      if('IntersectionObserver' in window && !reduce){
-        new IntersectionObserver(function(es){ es.forEach(function(e){ running=e.isIntersecting; if(running && !raf){ raf=requestAnimationFrame(draw); } if(!running){ cancelAnimationFrame(raf); raf=null; } }); }).observe(hero);
-      }
-      document.addEventListener('visibilitychange',function(){ if(document.hidden){ cancelAnimationFrame(raf); raf=null; } else if(running && !reduce && !raf){ raf=requestAnimationFrame(draw); } });
-    }
   })();
 </script>
 </body>
