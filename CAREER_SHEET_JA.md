@@ -1,6 +1,6 @@
 # 職務経歴書 (Curriculum Vitae / Career Sheet)
 
-**最終更新日:** 2026年10月22日  
+**最終更新日:** 2026年10月25日  
 **氏名:** ナビエフ・オキルジョン (Okiljon Nabev)  
 **生年月日:** 2004年生まれ  
 **居住地:** 日本・北海道（出身: ウズベキスタン ナマンガン州）  
@@ -23,12 +23,12 @@ Flutter × Firebase を中核としたクロスプラットフォーム（Mobile
 
 | 分野 | 技術要素 | 経験年数・習熟度 |
 | :--- | :--- | :--- |
-| **開発言語** | Dart, Python, Java, SQL, HTML5 / CSS3 / JavaScript | 3年（日常的な商用・研究開発） |
-| **フレームワーク** | **Flutter** (Mobile, Web, Desktop, Android TV 10-foot UI) | 2年半（設計・状態管理・テスト） |
-| **状態管理** | Riverpod, Provider, StateNotifier | 複雑な依存関係の整理、クリーンアーキテクチャ設計 |
+| **開発言語** | Dart, Python, Java, SQL, HTML5 / CSS3 / JavaScript | Java は高校在学中に独学開始、Dart は2023年頃から独学（個人開発・受託案件1件） |
+| **フレームワーク** | **Flutter** (Mobile, Web, Desktop, Android TV 10-foot UI) | 2023年頃から独学（設計・状態管理・テスト）、受託案件1件で実務経験 |
+| **状態管理** | Riverpod, Provider, StateNotifier | feature 単位のレイヤー分割（UI / Provider / Repository） |
 | **バックエンド・BaaS**| Firebase (Auth, Firestore, Cloud Functions, FCM, Realtime DB), Supabase | 2年（セキュリティルール・クエリ最適化） |
 | **AI / LLM 連携** | Google Gemini API (`google_generative_ai`), REST API, Function Calling | プロンプトエンジニアリング、構造化出力、自動テスト |
-| **CI / CD・ツール** | Git, GitHub, GitHub Actions, Docker, Android Studio, VS Code, Figma | 自動テストパイプライン構築、コードレビュー |
+| **CI / CD・ツール** | Git, GitHub, GitHub Actions, Firebase Emulator, Android Studio, VS Code, Figma | 静的解析・ユニットテスト・セキュリティルールテストの自動実行 |
 | **語学力** | **日本語: ビジネスレベル (JLPT N2)**、ウズベク語: ネイティブ、英語: 技術ドキュメント読解・会話 | 多国籍チームでのコミュニケーション・PM実績あり |
 
 ---
@@ -70,6 +70,9 @@ Flutter × Firebase を中核としたクロスプラットフォーム（Mobile
   - キッチン用（KDS）: 注文状況（調理中・配膳済）のリアルタイムステータス更新
   - 管理者用: 売上集計ダッシュボード、メニュー・在庫・材料原価管理
   - 日本語・英語・ウズベク語の3言語リアルタイムローカライズ
+* **セキュリティ・品質:**
+  - 管理者・キッチン権限を Firebase Auth **Custom Claims** で管理（メールアドレス判定を廃止）
+  - 注文データの形式・金額・ステータス遷移を `firestore.rules` で検証し、Firestore Emulator 上の自動テスト（14件）を GitHub Actions で実行
 
 ---
 
@@ -80,6 +83,7 @@ Flutter × Firebase を中核としたクロスプラットフォーム（Mobile
   - **専用 TV リモコンエンジン (`tv_key_helper.dart`):** リモコンの十字キー（上下左右）、決定キー（Select / Enter）、戻るキーの2重発火を防止し、フォーカス状態を視覚的にアニメーション表示。
   - ハイブリッド動画再生（MP4およびYouTubeストリーム）、10秒スキップ、視聴進捗自動保存（Continue Watching）。
   - リモコン1タップでログイン不要で全機能を体験できる **TV Demo / ゲストモード** 搭載。
+  - 管理者権限を **Custom Claims** で管理し、Realtime Database ルールを Emulator 上の自動テスト（8件）で検証。
 
 ---
 
@@ -91,8 +95,8 @@ Flutter × Firebase を中核としたクロスプラットフォーム（Mobile
 ### ② 生成AI・新技術をスピーディにプロダクトへ落とし込む実装力
 ただAPIを叩くだけでなく、Cloud Functions を介したセキュアな設計や、Gemini API のストリーミング生成、構造化JSONレスポンスのパースなど、実用的なAI機能の統合を素早く実現できます。
 
-### ③ クリーンアーキテクチャとテスト自動化へのこだわり
-「動けばいい」コードではなく、Riverpodやクリーンアーキテクチャに基づいた保守性の高いディレクトリ構成、GitHub Actions による静的解析（`flutter analyze`）とテスト自動化（CI/CD）を一貫して実践しています。
+### ③ 保守性・セキュリティとテスト自動化へのこだわり
+「動けばいい」コードではなく、Riverpod を用いた feature 単位の保守性の高いディレクトリ構成を心がけています。主要リポジトリ（EduPlanner AI・Restaurant App・Smart TV App）には GitHub Actions を導入し、静的解析（`flutter analyze`）・ユニット／ウィジェットテスト・セキュリティルールのテストを自動実行しています。
 
 ---
 
