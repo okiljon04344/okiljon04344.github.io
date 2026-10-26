@@ -1,6 +1,6 @@
 # okiljon04344.github.io
 
-Okiljon Nabev（ナビエフ・オキルジョン）のポートフォリオサイトのソースコードです。
+Okiljon Nabiev（ナビエフ・オキルジョン）のポートフォリオサイトのソースコードです。
 
 - 🌐 **サイト:** [https://okiljon04344.github.io/](https://okiljon04344.github.io/)
 - 👤 **GitHub プロフィール:** [github.com/okiljon04344](https://github.com/okiljon04344)
