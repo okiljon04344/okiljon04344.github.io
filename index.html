@@ -88,12 +88,6 @@
 
   /* Stats */
   .stats{padding:48px 0 0}
-  .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-  @media (min-width:760px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
-  .stat{background:var(--surface);padding:24px 16px;text-align:center}
-  .stat b{display:block;font-size:clamp(1.5rem,4vw,2rem);line-height:1.3;font-weight:700}
-  .stat b small{font-size:.5em;margin-left:2px;color:var(--accent)}
-  .stat span{font-size:.8125rem;color:var(--muted);line-height:1.5;display:block;margin-top:4px}
 
   .tech{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;list-style:none}
   .tech li{font-size:var(--fs-small);font-weight:500;color:var(--muted);border:1px solid var(--line);background:var(--surface);padding:4px 16px;border-radius:var(--r-sm)}
@@ -102,7 +96,6 @@
   section{padding:80px 0}
   @media (max-width:640px){section{padding:56px 0}}
   section[id],header[id]{scroll-margin-top:72px}
-  .eyebrow{display:block;font-size:.8125rem;font-weight:700;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
   .sec-head{margin-bottom:40px;max-width:640px}
   .sec-head h2{font-size:var(--fs-h2);line-height:1.4;font-weight:700}
   .sec-head p{color:var(--muted);margin-top:8px}
@@ -182,28 +175,24 @@
   .lang div:last-child{border-bottom:none}
   .lang span{color:var(--muted)}
 
-  /* Hello */
-  #hello{padding-top:0}
-  .hello-grid{display:grid;gap:24px}
-  @media (min-width:900px){.hello-grid{grid-template-columns:1.1fr .9fr}}
-  .code{background:var(--surface);border-radius:var(--r);border:1px solid var(--line);overflow:hidden}
-  .code pre{margin:0;padding:24px;overflow-x:auto;font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace;font-size:.8125rem;line-height:1.9;color:var(--ink)}
-  .code .m{color:var(--muted)}
-  .journey{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px}
-  .journey h3{font-size:.8125rem;letter-spacing:.08em;color:var(--accent);margin-bottom:4px}
-  .journey p.j-lead{color:var(--muted);font-size:.9375rem;margin-bottom:8px}
-  .journey svg{width:100%;height:auto;display:block}
-  .j-path{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-dasharray:2 6}
-  .j-label{font-size:14px;font-weight:700;fill:#1c2024}
-  .j-sub{font-size:11.5px;font-weight:400;fill:#5a636b}
+  /* Repo list */
+  .repo-list{margin-top:48px;padding-top:40px;border-top:1px solid var(--line)}
+  .repo-list h3{font-size:var(--fs-h3);margin-bottom:16px}
+  .repo-list ul{list-style:none;display:grid;gap:12px}
+  .repo-list li{display:grid;gap:4px 24px;padding:16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--bg)}
+  @media (min-width:760px){.repo-list li{grid-template-columns:200px 1fr;align-items:baseline}}
+  .repo-list a{font-weight:700;text-decoration:none;color:var(--accent);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9375rem}
+  .repo-list a:hover{text-decoration:underline}
+  .repo-list span{font-size:.9375rem;color:var(--muted)}
 
-  /* Vision */
-  .vision{background:var(--dark);color:#fff}
-  .vision .wrap>*{max-width:720px}
-  .vision .eyebrow{color:#7fcfb9}
-  .vision h2{font-size:var(--fs-h2);line-height:1.6;margin:0 0 16px}
-  .vision p{color:#c3c9cf}
-
+  /* Contact */
+  #contact{background:var(--surface);border-top:1px solid var(--line)}
+  .contact-list{list-style:none;display:grid;gap:12px;max-width:560px}
+  .contact-list li{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line)}
+  .contact-list li:last-child{border-bottom:none}
+  .contact-list span{font-size:var(--fs-small);color:var(--muted);font-weight:700}
+  .contact-list a{color:var(--ink);text-decoration:none;word-break:break-all}
+  .contact-list a:hover{color:var(--accent)}
   footer{background:var(--dark);color:#98a1a9;font-size:.8125rem;padding:24px 0;border-top:1px solid #2e353b}
   footer .wrap{text-align:center}
 
@@ -230,6 +219,7 @@
       <li><a href="#works">制作実績</a></li>
       <li><a href="#skills">スキル</a></li>
       <li><a href="#about">経歴</a></li>
+      <li><a href="#contact">連絡先</a></li>
       <li><a class="strong" href="https://github.com/okiljon04344/okiljon04344/blob/main/SKILL_SHEET_JA.md" target="_blank" rel="noopener noreferrer">開発経歴書</a></li>
       <li><a href="https://github.com/okiljon04344" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
     </ul>
@@ -263,12 +253,6 @@
 
 <div class="stats">
   <div class="wrap">
-    <div class="stats-grid">
-      <div class="stat"><b class="en">4<small>名</small></b><span>チームPMとして実案件を担当</span></div>
-      <div class="stat"><b class="en">6<small>か月</small></b><span>お客様向けアプリの開発期間</span></div>
-      <div class="stat"><b class="en">N2</b><span>日本語能力試験</span></div>
-      <div class="stat"><b class="en">1<small>位</small></b><span>4か国の国際ビジネスアイデアコンテスト</span></div>
-    </div>
     <ul class="tech" aria-label="使っている技術">
       <li>Flutter</li><li>Dart</li><li>Riverpod</li><li>go_router</li><li>Firebase</li><li>Cloud Firestore</li><li>Cloud Messaging</li><li>Gemini API</li><li>Python</li><li>Java</li><li>PM</li><li>JLPT N2</li>
     </ul>
@@ -281,7 +265,6 @@
   <section id="strengths">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="eyebrow en">Strengths</span>
         <h2>わたしの3つの強み</h2>
       </div>
       <div class="strengths">
@@ -309,7 +292,6 @@
   <section id="works">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="eyebrow en">Works</span>
         <h2>制作実績</h2>
         <p>実際のお客様向けのチーム開発から、個人開発・自主プロジェクトまで。</p>
       </div>
@@ -361,6 +343,14 @@
           <div style="margin-top:24px"><a class="btn btn-sm" href="https://github.com/okiljon04344/eduplaner_ai" target="_blank" rel="noopener noreferrer">GitHub リポジトリを見る ↗</a></div>
         </div>
       </article>
+      <div class="repo-list reveal">
+        <h3>その他の公開リポジトリ</h3>
+        <ul>
+          <li><a href="https://github.com/okiljon04344/restoranapp" target="_blank" rel="noopener noreferrer">restoranapp</a><span>QR テーブルオーダーと店舗管理（顧客・キッチン・管理者）を 1 つの Flutter アプリにまとめた多言語対応システム。個人開発。</span></li>
+          <li><a href="https://github.com/okiljon04344/smart_tv_app" target="_blank" rel="noopener noreferrer">smart_tv_app</a><span>Android TV 向けの動画ストリーミングアプリ。リモコン（D-Pad）操作と動画再生に対応。</span></li>
+          <li><a href="https://github.com/okiljon04344/insta_clone_lesson" target="_blank" rel="noopener noreferrer">insta_clone_lesson</a><span>Flutter と Firebase の学習のために作成した Instagram 風 SNS アプリ。学習用。</span></li>
+        </ul>
+      </div>
 
     </div>
   </section>
@@ -369,7 +359,6 @@
   <section id="skills">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="eyebrow en">Skills</span>
         <h2>スキル</h2>
       </div>
       <div class="skill-grid">
@@ -413,7 +402,6 @@
   <section id="about" style="padding-top:0">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="eyebrow en">About</span>
         <h2>経歴</h2>
       </div>
       <div class="about-grid">
@@ -439,13 +427,12 @@
             <figure class="award-photo"><img src="photo7.jpg" alt="国際ビジネスアイデアコンテストの受賞時、賞品を持つメンバー" loading="lazy" onerror="this.parentNode.style.display='none'"></figure>
             <figcaption>受賞時の記念写真</figcaption>
             <div class="award-body">
-              <span class="eyebrow en">Award</span>
               <h3>国際ビジネスアイデアコンテスト<br>チームで第1位</h3>
               <p>ロシア・カザフスタン・キルギス・ウズベキスタンの4か国が参加。メンタルヘルスをチェックし、医師につなぐアプリのアイデアを提案しました。</p>
             </div>
           </div>
           <div class="lang">
-            <h3 class="en">LANGUAGES</h3>
+            <h3>言語</h3>
             <div><b>ウズベク語</b><span>母語</span></div>
             <div><b>日本語</b><span>JLPT N2</span></div>
           </div>
@@ -454,56 +441,18 @@
     </div>
   </section>
 
-  <!-- コードで自己紹介 -->
-  <section id="hello">
+  <!-- 連絡先 -->
+  <section id="contact">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="eyebrow en">Hello, World</span>
-        <h2>コードで自己紹介</h2>
-        <p>エンジニアらしく、自分のことを Dart のクラスで書いてみました。</p>
+        <h2>連絡先</h2>
+        <p>ご連絡は下記メールアドレスまでお願いいたします。開発経歴書は GitHub 上で公開しています。</p>
       </div>
-      <div class="hello-grid">
-        <div class="code reveal" id="code">
-<pre>class Okiljon extends Engineer {
-  final from    = 'Namangan, Uzbekistan';
-  final basedIn = 'Nakashibetsu, Hokkaido';
-  final speaks  = ['Uzbek', 'Japanese (N2)'];
-  final stack   = ['Flutter', 'Riverpod',
-                   'Firebase', 'Gemini API'];
-  final roles   = ['Developer', 'PM'];
-
-  <span class="m">// 2027年3月 卒業見込</span>
-  @override
-  String get mission =&gt;
-      'アイデアを、チームで動くアプリに。';
-}</pre>
-        </div>
-        <div class="journey reveal" id="journey">
-          <h3 class="en">MY JOURNEY</h3>
-          <p class="j-lead">ナマンガンから、横浜、そして北海道・中標津へ。</p>
-          <svg viewBox="0 0 400 300" role="img" aria-label="ナマンガン（ウズベキスタン）から横浜、中標津への移動を示す図">
-            <path class="j-path" d="M60 210 C 120 70, 240 80, 290 190 C 300 140, 322 98, 345 75"/>
-            <circle cx="60" cy="210" r="6" fill="#0b7a62"/>
-            <circle cx="290" cy="190" r="6" fill="#0b7a62"/>
-            <circle cx="345" cy="75" r="6" fill="#0b7a62"/>
-            <text class="j-label" x="38" y="240">Namangan</text>
-            <text class="j-sub" x="38" y="258">〜2022 出身・中等学校</text>
-            <text class="j-label" x="200" y="222">Yokohama</text>
-            <text class="j-sub" x="200" y="240">2023–2025 日本語科・PM</text>
-            <text class="j-label" x="236" y="40">Nakashibetsu</text>
-            <text class="j-sub" x="236" y="58">2025– IT専門学校</text>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. ビジョン（締め） -->
-  <section class="vision">
-    <div class="wrap reveal">
-      <span class="eyebrow en">Vision</span>
-      <h2>日本で、技術とチームの力で<br>「使われるアプリ」を届けるエンジニアに。</h2>
-      <p>開発の力に加えて、PMとして身につけた「人と人をつなぐ力」を活かし、お客様とチームの両方から信頼されるエンジニアを目指しています。</p>
+      <ul class="contact-list reveal">
+        <li><span>メール</span><a href="mailto:okiljonnabev@gmail.com">okiljonnabev@gmail.com</a></li>
+        <li><span>GitHub</span><a href="https://github.com/okiljon04344" target="_blank" rel="noopener noreferrer">github.com/okiljon04344</a></li>
+        <li><span>開発経歴書</span><a href="https://github.com/okiljon04344/okiljon04344/blob/main/SKILL_SHEET_JA.md" target="_blank" rel="noopener noreferrer">SKILL_SHEET_JA.md</a></li>
+      </ul>
     </div>
   </section>
 
