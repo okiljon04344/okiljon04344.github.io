@@ -1,7 +1,7 @@
 # Hi there, I'm Okiljon Nabev (ナビエフ・オキルジョン) 👋
 
 [![Portfolio Website](https://img.shields.io/badge/🌐_Portfolio-okiljon04344.github.io-10a37f?style=for-the-badge)](https://okiljon04344.github.io/)
-[![Career Sheet](https://img.shields.io/badge/📄_職務経歴書-CAREER__SHEET-6C63FF?style=for-the-badge)](CAREER_SHEET_JA.md)
+[![開発経歴書](https://img.shields.io/badge/開発経歴書-SKILL__SHEET-6C63FF?style=for-the-badge)](SKILL_SHEET_JA.md)
 [![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
 [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com)
